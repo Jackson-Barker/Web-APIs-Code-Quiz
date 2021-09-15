@@ -1,0 +1,12 @@
+#quiz-container {
+  position: absolute;
+  border: red solid 5px;
+  width: 550px;
+  height: 550px;
+  left: 30%;
+  top:15%;
+}
+
+#quizQuestion {
+  text-align: center;
+}
