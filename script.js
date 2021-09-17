@@ -1,7 +1,9 @@
+// declared variables
 const startButton = document.getElementById("#start-btn");
 const startButton = document.getElementById("quiz-container");
+const 
 
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener:("click", startQuiz);
 
 function startQuiz() {}
 
