@@ -1,12 +1,3 @@
-// declared variables
-const startButton = document.getElementById("#start-btn");
-const startButton = document.getElementById("quiz-container");
-const 
-
-startButton.addEventListener:("click", startQuiz);
-
-function startQuiz() {}
-
 const questions = [
   {
     question: "What does HTML stand for?",
@@ -54,3 +45,32 @@ const questions = [
     ],
   },
 ];
+
+// declared variables
+var timeLeftEl = document.querySelector("#timeLeftEl");
+var timeStartEl = document.querySelector("#start-btn");
+var quizQuestionEl = document.getElementById("#questionDiv");
+var quizContainerEl = document.getElementById("#quiz-Container");
+
+var timeLeft = 60;
+
+timeStartEl.addEventListener("click", setTime);
+
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function () {
+    timeLeft--;
+    timeLeftEl.textContent = timeLeft + " seconds left.";
+
+    if (timeLeft <= 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      gameOver();
+      timeLeftEl.textContent = " Quiz Over ";
+    }
+  }, 1000);
+};
+
+
+
+
