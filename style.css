@@ -40,3 +40,7 @@ body {
 #start-btn:hover {
   border-color: black;
 }
+
+.invisible {
+  display: none;
+}
