@@ -6,53 +6,6 @@
 // after five questions your remaining time will be your score
 // you will be prompted to enter your entails
 // a new html will load displaying the leader board that is stored in local storage
-// const questions = [
-//   {
-//     question: "What does HTML stand for?",
-//     answers: [
-//       { text: "Hyper Text Markup Lever", correct: false },
-//       { text: "Hyper Text Markup Language", correct: true },
-//       { text: "Hyper Text Makeup Language", correct: false },
-//       { text: "Hyper Text Message Language", correct: false },
-//     ],
-//   },
-//   {
-//     question: "What does CSS stand for?",
-//     answers: [
-//       { text: "Cascading Style Sheets", correct: true },
-//       { text: "Coding Style Sheets", correct: false },
-//       { text: "Copy Style Sheets", correct: false },
-//       { text: "Code Support Systems", correct: false },
-//     ],
-//   },
-//   {
-//     question: "Inside which HTMl element do we put JavaScript?",
-//     answers: [
-//       { text: "<Scripture>", correct: false },
-//       { text: "<js>", correct: false },
-//       { text: "<javaJS>", correct: false },
-//       { text: "<script>", correct: true },
-//     ],
-//   },
-//   {
-//     question: "How can you add a comment in JavaScript?",
-//     answers: [
-//       { text: "<-this is a comment->", correct: false },
-//       { text: "*this is a comment*", correct: false },
-//       { text: "//this is a comment", correct: true },
-//       { text: "--this is a comment--", correct: false },
-//     ],
-//   },
-//   {
-//     question: "Which variable is used to assign a value to a variable?",
-//     answer: [
-//       { text: "-", correct: false },
-//       { text: "=", correct: true },
-//       { text: "+", correct: false },
-//       { text: "x", correct: false },
-//     ],
-//   },
-// ];
 
 var questions = [
   {
@@ -61,7 +14,7 @@ var questions = [
       "Hyper Text Markup Lever",
       "Hyper Text Markup Language",
       "Hyper Text Makeup Language",
-      "Hyper Text Message Language"
+      "Hyper Text Message Language",
     ],
     answer: "Hyper Text Markup Language",
   },
@@ -79,20 +32,25 @@ var questions = [
 
   {
     title: "How can you add a comment in JavaScript?",
-    choices: ["<Scripture>", "<js>", "<javaJS>", "<script>"],
-    answer: "<script>",
+    choices: [
+      "<-this is a comment-",
+      "*this is a comment ",
+      "//this is a comment",
+      "--this is a comment",
+    ],
+    answer: "//this is a comment ",
   },
 
   {
-    title: "How can you add a comment in JavaScript?",
-    choices: ["<Scripture>", "<js>", "<javaJS>", "<script>"],
-    answer: "<script>",
+    title: "Which built-in method the length of the string?",
+    choices: ["length()", "size()", "index()", "None of the above"],
+    answer: "length()",
   },
 
   {
-    title: "How can you add a comment in JavaScript?",
-    choices: ["<Scripture>", "<js>", "<javaJS>", "<script>"],
-    answer: "<script>",
+    title: "Which variable is used to assign a value to a variable?",
+    choices: ["-", "=", "+", "X"],
+    answer: "=",
   },
 ];
 
@@ -121,27 +79,23 @@ function showquestions() {
   option4.innerHTML = questions[index].choices[3];
 }
 
-
 function render() {
   introEl.classList.add("invisible");
   questionsEl.classList.remove("invisible");
-  showquestions()
+  showquestions();
 
   for (let i = 0; i < options.length; i++) {
-    options[i].addEventListener("click", function(){
-      index++
-      showquestions()
-    })
-   
- }
-
+    options[i].addEventListener("click", function () {
+      index++;
+      showquestions();
+    });
+  }
 }
 
 function setTime() {
-render()
-  // Sets interval in variabl
+  render();
+  // Sets interval in variable
   var timerInterval = setInterval(function () {
-    
     timeLeft--;
     timeLeftEl.textContent = timeLeft + " seconds left.";
 
