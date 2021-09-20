@@ -14,8 +14,6 @@ const questionElement = document.getElementById("question")
 const answerButtonsElement = document.getElementById("answer-buttons")
 var timerEl = document.querySelector("#timer")
 
-
-
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener("click", setTime)
@@ -55,14 +53,20 @@ function showQuestion(question) {
 function setTime() {  
   var timeInterval = setInterval(function() {
     currentTime--;
-    timerEl.textContent = currentTime = "seconds left."
+    timerEl.textContent = currentTime + "seconds left."
 
     if (currentTime <= 0) {
       clearInterval(timeInterval);
       quizOver();
       timerEl.textContent = "quiz Over!!"
+    };
+    if (currentQuestionIndex >= questions.length) {
+      clearInterval(timeInterval);
+      quizOver();
+      timerEl.textContent = "Quiz Over!!"
     }
-  })  
+  }, 1000)  
+  var currentTime = questions.length * 15;
 }
 
 function resetState() {
