@@ -6,33 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
     <link rel="stylesheet" href="./style.css">
+    <script defer src= "script.js"></script>
 
 </head>
 <body>
-    <a href= "highScores.html">View Highscores</a>
-<!-- container for quiz -->
-    <div id="quiz-container"> 
-        <!-- container for timer -->
-        <div id="timeLeftEl"></div>
-        <!-- container for quiz questions -->
-        <div id="intro">
-            <h1>Coding quiz</h1>
-            <p>Welcome to the code quiz, enter if you dare!!!</p>
-            <button id="start-btn">Start Quiz</button>
+    <div class = "intro">
+        <hi>Coding Quiz!</hi>
+        <a href= "HighScores.html">View Highscores</a>
+    </div>
+    <div class= "container">
+        <div id= "question-container" class= "hide">
+        <div id="question">Question</div>
+        <div id="answer-buttons" class="btn-grid">
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
         </div>
-        <div id="questionsEl" class= "invisible">
-            <h1 id="questionTitle"></h1>
-            <ol>
-                <li><button class= "options" id= "option1"></button></li>
-                <li><button class= "options" id="option2"></button></li>
-                <li><button class= "options" id="option3"></button></li>
-                <li><button class="options" id="option4"></button></li>
-            </ol>
+        </div>
+        <div class= "controls">
+            <button id= "start-btn" class="start-btn btn">Start</button>
+            <button id= "next-btn" class="next-btn btn hide">Next</button>
         </div>
     </div>
     
-    <script src="script.js"></script>
-    
-
 </body>
+
 </html>

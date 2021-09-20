@@ -7,105 +7,136 @@
 // you will be prompted to enter your entails
 // a new html will load displaying the leader board that is stored in local storage
 
-var questions = [
-  {
-    title: "What does HTML stand for?",
-    choices: [
-      "Hyper Text Markup Lever",
-      "Hyper Text Markup Language",
-      "Hyper Text Makeup Language",
-      "Hyper Text Message Language",
-    ],
-    answer: "Hyper Text Markup Language",
-  },
+const startButton = document.getElementById("start-btn")
+const nextButton = document.getElementById("next-btn")
+const questionContainerElement = document.getElementById("question-container")
+const questionElement = document.getElementById("question")
+const answerButtonsElement = document.getElementById("answer-buttons")
+var timerEl = document.querySelector("#timer")
 
-  {
-    title: "What does CSS stand for?",
-    choices: [
-      "Cascading Style Sheets",
-      "Coding Style Sheets",
-      "Copy Style Sheets",
-      "Code Support Systems",
-    ],
-    answer: "Cascading Style Sheets",
-  },
 
-  {
-    title: "How can you add a comment in JavaScript?",
-    choices: [
-      "<-this is a comment-",
-      "*this is a comment ",
-      "//this is a comment",
-      "--this is a comment",
-    ],
-    answer: "//this is a comment ",
-  },
 
-  {
-    title: "Which built-in method the length of the string?",
-    choices: ["length()", "size()", "index()", "None of the above"],
-    answer: "length()",
-  },
+let shuffledQuestions, currentQuestionIndex
 
-  {
-    title: "Which variable is used to assign a value to a variable?",
-    choices: ["-", "=", "+", "X"],
-    answer: "=",
-  },
-];
+startButton.addEventListener("click", setTime)
+startButton.addEventListener("click", startGame)
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
 
-// declared variables
-var timeLeftEl = document.querySelector("#timeLeftEl");
-var timeStartEl = document.querySelector("#start-btn");
-var introEl = document.getElementById("intro");
-var quizContainerEl = document.getElementById("quiz-Container");
-var questionsEl = document.getElementById("questionsEl");
-var option1 = document.getElementById("option1");
-var option2 = document.getElementById("option2");
-var option3 = document.getElementById("option3");
-var option4 = document.getElementById("option4");
-var questionTitle = document.getElementById("questionTitle");
-var options = document.querySelectorAll(".options");
-var index = 0;
-
-var timeLeft = questions.length * 15;
-
-timeStartEl.addEventListener("click", setTime);
-function showquestions() {
-  questionTitle.innerHTML = questions[index].title;
-  option1.innerHTML = questions[index].choices[0];
-  option2.innerHTML = questions[index].choices[1];
-  option3.innerHTML = questions[index].choices[2];
-  option4.innerHTML = questions[index].choices[3];
+function startGame() {
+  startButton.classList.add("hide")
+  shuffledQuestions = questions.sort(() => Math.random() - .5)
+  currentQuestionIndex = 0
+  questionContainerElement.classList.remove("hide")
+  setNextQuestion()
 }
 
-function render() {
-  introEl.classList.add("invisible");
-  questionsEl.classList.remove("invisible");
-  showquestions();
+function setNextQuestion() {
+  resetState()
+  showQuestion(shuffledQuestions[currentQuestionIndex])
+}
 
-  for (let i = 0; i < options.length; i++) {
-    options[i].addEventListener("click", function () {
-      index++;
-      showquestions();
-    });
+function showQuestion(question) {
+  questionElement.innerText = question.question
+  question.answers.forEach(answer => {
+    const button = document.createElement("button")
+    button.innerText = answer.text
+    button.classList.add("btn")
+    if (answer.correct) {
+      button.dataset.correct = answer.correct
+    }
+    button.addEventListener("click", selectAnswer)
+    answerButtonsElement.appendChild(button)
+  })
+}
+
+function setTime() {  
+  var timeInterval = setInterval(function() {
+    currentTime--;
+    timerEl.textContent = currentTime = "seconds left."
+
+    if (currentTime <= 0) {
+      clearInterval(timeInterval);
+      quizOver();
+      timerEl.textContent = "quiz Over!!"
+    }
+  })  
+}
+
+function resetState() {
+  clearStatusClass(document.body)
+  nextButton.classList.add("hide")
+  while (answerButtonsElement.firstChild) {
+    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
   }
 }
 
-function setTime() {
-  render();
-  // Sets interval in variable
-  var timerInterval = setInterval(function () {
-    timeLeft--;
-    timeLeftEl.textContent = timeLeft + " seconds left.";
-
-    if (timeLeft <= 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      gameOver();
-      timeLeftEl.textContent = " Quiz Over ";
-    }
-  }, 1000);
+function selectAnswer(e) {
+  const selectedButton = e.target
+  const correct = selectedButton.dataset.correct
+  setStatusClass(document.body, correct)
+  Array.from(answerButtonsElement.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct)
+  })
+  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove("hide")
+  } else {
+    startButton.innerText = "Restart"
+    startButton.classList.remove("hide")
+  }
 }
 
-function gameOver() {}
+function setStatusClass(element, correct) {
+  clearStatusClass(element)
+  if (correct) {
+    element.classList.add("correct")
+  } else {
+    element.classList.add("wrong")
+  }
+}
+
+function clearStatusClass(element) {
+  element.classList.remove("correct")
+  element.classList.remove("wrong")
+}
+
+const questions = [
+  {
+    question: "What does HTML stand for?",
+    answers: [
+      { text: "Hyper Text Markup Lever", correct: false },
+      { text: "Hyper Text Markup Language", correct: true },
+      { text: "Hyper Text Makeup Language", correct: false },
+      { text: "Hyper Text Message Language", correct: false }
+    ],
+  },
+  {
+    question: "What does CSS stand for?",
+    answers: [
+      { text: "Cascading Style Sheets", correct: true },
+      { text: "Coding Style Sheets", correct: false },
+      { text: "Copy Style Sheets", correct: false },
+      { text: "Code Support Systems", correct: false }
+    ],
+  },
+  {
+    question: "Inside which HTMl element do we put JavaScript?",
+    answers: [
+      { text: "<Scripture>", correct: false },
+      { text: "<js>", correct: false },
+      { text: "<javaJS>", correct: false },
+      { text: "<script>", correct: true }
+    ],
+  },
+  {
+    question: "How can you add a comment in JavaScript?",
+    answers: [
+      { text: "<-this is a comment->", correct: false },
+      { text: "*this is a comment*", correct: false },
+      { text: "//this is a comment", correct: true },
+      { text: "--this is a comment--", correct: false }
+    ]
+  }
+]
