@@ -7,6 +7,7 @@
 // you will be prompted to enter your entails
 // a new html will load displaying the leader board that is stored in local storage
 
+
 const startButton = document.getElementById("start-btn")
 const nextButton = document.getElementById("next-btn")
 const questionContainerElement = document.getElementById("question-container")
@@ -14,8 +15,10 @@ const questionElement = document.getElementById("question")
 const answerButtonsElement = document.getElementById("answer-buttons")
 var timerEl = document.querySelector("#timer")
 
+// shuffles questions
 let shuffledQuestions, currentQuestionIndex
 
+// event listeners for timer and quiz
 startButton.addEventListener("click", setTime)
 startButton.addEventListener("click", startGame)
 nextButton.addEventListener("click", () => {
@@ -23,6 +26,7 @@ nextButton.addEventListener("click", () => {
   setNextQuestion()
 })
 
+// hides start button, shuffles questions, removes hide from questions
 function startGame() {
   startButton.classList.add("hide")
   shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -31,11 +35,13 @@ function startGame() {
   setNextQuestion()
 }
 
+// displays next question and resets answers
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
+// 
 function showQuestion(question) {
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -50,6 +56,8 @@ function showQuestion(question) {
   })
 }
 
+
+// timer function
 function setTime() {  
   var timeInterval = setInterval(function() {
     currentTime--;
