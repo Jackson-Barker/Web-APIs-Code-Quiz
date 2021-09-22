@@ -59,6 +59,7 @@ function showQuestion(question) {
 // timer functions and variables 
 function quizOver() {
   endTime = currentTime;
+  removeEventListener(setTime);
 }
 
 var endTime;
@@ -99,7 +100,6 @@ function selectAnswer(e) {
   if (!correct) {
     currentTime -= 10;
   }
-  console.log("test");
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
