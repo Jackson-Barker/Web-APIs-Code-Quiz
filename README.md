@@ -17,6 +17,9 @@ This code quiz will present the user with five questions and determine if the us
 - The user will have four choices per question and will be altered if their answer was correct or incorrect by a color change of the back ground and answer choices. 
 - After the final question the timer will stop and the user will be asked to enter their entails to be displayed with their high score on the high score page. 
 
+# credits 
+
+I collaborated with classmate Jon Jackson through much of the project.
 
 # Link
 
