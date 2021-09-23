@@ -65,7 +65,7 @@ function quizOver() {
   currentTime = currentTime;
   console.log("over");
 }
-
+// timer variables 
 var endTime;
 var currentTime;
 
@@ -85,6 +85,7 @@ function setTime() {
   var currentTime = questions.length * 15;
 }
 
+// hides next button until questions is answered
 function resetState() {
   clearStatusClass(document.body);
   nextButton.classList.add("hide");
@@ -93,6 +94,8 @@ function resetState() {
   }
 }
 
+// function determines if questions is correct and determines what navigation button is displayed based 
+// which question you are on 
 function selectAnswer(e) {
   const selectedButton = e.target;
   const correct = selectedButton.dataset.correct;
@@ -128,6 +131,7 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
+// attempt at creating high score page 
 const person = {
   name:"persons name",
   time: currentTime
