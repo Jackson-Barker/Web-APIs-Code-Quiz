@@ -24,4 +24,4 @@ https://jackson-barker.github.io/Web-APIs-Code-Quiz/
 
 # Screen Shot 
 
-![Code Quiz SS](./code-quiz.png)
+![Code Quiz SS](./codequizSS.png)
